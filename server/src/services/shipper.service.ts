@@ -4,8 +4,9 @@ import {
     findAll,
     remove,
     update,
-} from "../repositories/shipper.repository";
-import { ShipperPayload } from "../types/shipper.type";
+} from "@/repositories/shipper.repository";
+import { ShipperPayload } from "@/types/shipper.type";
+import { shipperPayloadValidation } from "@/validations/shipper.validation";
 
 export const findAllShipper = async (): Promise<Shipper[]> => {
     const data = await findAll();
@@ -16,7 +17,10 @@ export const findAllShipper = async (): Promise<Shipper[]> => {
 export const createShipper = async (
     payload: ShipperPayload
 ): Promise<Shipper> => {
-    const data = await create(payload);
+    const { value, error } = shipperPayloadValidation(payload);
+    if (error != undefined) throw new Error("invalid input");
+
+    const data = await create(value);
 
     return data;
 };
@@ -25,7 +29,10 @@ export const updateShipper = async (
     id: string,
     payload: ShipperPayload
 ): Promise<string> => {
-    const data = await update(id, payload);
+    const { value, error } = shipperPayloadValidation(payload);
+    if (error != undefined) throw new Error("invalid input");
+
+    const data = await update(id, value);
 
     return data;
 };

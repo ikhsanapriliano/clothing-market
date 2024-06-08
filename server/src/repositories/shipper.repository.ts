@@ -1,6 +1,6 @@
 import { Shipper } from "@prisma/client";
-import prisma from "../utils/prisma";
-import { ShipperPayload } from "../types/shipper.type";
+import prisma from "@/utils/prisma";
+import { ShipperPayload } from "@/types/shipper.type";
 
 export const findAll = async (): Promise<Shipper[]> => {
     const data = await prisma.shipper.findMany();

@@ -1,0 +1,14 @@
+echo "😁 testing your project before committing"
+
+echo "🤖 server start"
+
+cd server
+npm run test || 
+(
+    echo "🤮 [SERVER] [TESTING] unit testing on server failed";
+    false;
+)
+
+echo "😝 server done"
+
+echo "🪟 ready to be committed!"

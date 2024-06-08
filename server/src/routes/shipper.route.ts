@@ -4,7 +4,7 @@ import {
     findAllShipperHandler,
     removeShipperHandler,
     updateShipperHandler,
-} from "../controllers/shipper.controller";
+} from "@/controllers/shipper.controller";
 
 const shipperRoute = Router();
 

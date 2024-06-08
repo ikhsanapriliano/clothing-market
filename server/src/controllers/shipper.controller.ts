@@ -4,8 +4,8 @@ import {
     findAllShipper,
     removeShipper,
     updateShipper,
-} from "../services/shipper.service";
-import { ResponseType } from "../types/common.type";
+} from "@/services/shipper.service";
+import { ResponseType } from "@/types/common.type";
 
 export const findAllShipperHandler = async (
     req: Request,
