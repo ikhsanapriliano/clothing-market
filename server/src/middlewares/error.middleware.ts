@@ -10,10 +10,18 @@ export const errorHandler = (
 ): void => {
     logger.error(err);
 
-    const response: ErrorType = {
+    let response: ErrorType = {
         error: "500 internal server error",
         message: err.message,
     };
+
+    const message = err.message.split(":");
+    if (message[0] == "400") {
+        response.error = "400 bad request";
+        response.message = message[1];
+
+        res.status(400).json(response);
+    }
 
     res.status(500).json(response);
 };

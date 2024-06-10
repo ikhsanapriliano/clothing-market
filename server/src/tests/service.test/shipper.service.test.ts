@@ -3,15 +3,16 @@ import {
     createShipper,
     updateShipper,
     removeShipper,
-} from "@/services/shipper.service";
+} from "../../services/shipper.service";
 import {
+    findById,
     findAll,
     create,
     update,
     remove,
-} from "@/repositories/shipper.repository";
+} from "../../repositories/shipper.repository";
 import { Shipper } from "@prisma/client";
-import { ShipperPayload } from "@/types/shipper.type";
+import { ShipperPayload } from "../../types/shipper.type";
 
 jest.mock("@/repositories/shipper.repository");
 
@@ -68,9 +69,17 @@ describe("shipper service test", () => {
             service: "1",
             fee: 1,
         };
+        const mockShipper: Shipper = {
+            id: mockId,
+            service: "1",
+            fee: 1,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        };
 
         const mockOutput: string = `shipper with id ${mockId} successfully updated`;
 
+        (findById as jest.Mock).mockResolvedValue(mockShipper);
         (update as jest.Mock).mockResolvedValue(mockOutput);
 
         const result: string = await updateShipper(mockId, mockPayload);
@@ -80,9 +89,16 @@ describe("shipper service test", () => {
 
     it("delete shipper", async () => {
         const mockId: string = "1";
-
         const mockOutput: string = `shipper with id ${mockId} successfully deleted`;
+        const mockShipper: Shipper = {
+            id: mockId,
+            service: "1",
+            fee: 1,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        };
 
+        (findById as jest.Mock).mockResolvedValue(mockShipper);
         (remove as jest.Mock).mockResolvedValue(mockOutput);
 
         const result: string = await removeShipper(mockId);

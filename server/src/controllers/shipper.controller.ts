@@ -4,8 +4,8 @@ import {
     findAllShipper,
     removeShipper,
     updateShipper,
-} from "@/services/shipper.service";
-import { ResponseType } from "@/types/common.type";
+} from "../services/shipper.service";
+import { ResponseType } from "../types/common.type";
 
 export const findAllShipperHandler = async (
     req: Request,
@@ -23,7 +23,7 @@ export const findAllShipperHandler = async (
 
         return res.json(response);
     } catch (error: Error | unknown) {
-        throw error;
+        next(error);
     }
 };
 
@@ -44,7 +44,7 @@ export const createShipperHandler = async (
 
         return res.json(response);
     } catch (error: Error | unknown) {
-        throw error;
+        next(error);
     }
 };
 
@@ -67,7 +67,7 @@ export const updateShipperHandler = async (
 
         return res.json(response);
     } catch (error: Error | unknown) {
-        throw error;
+        next(error);
     }
 };
 
@@ -89,6 +89,6 @@ export const removeShipperHandler = async (
 
         return res.json(response);
     } catch (error: Error | unknown) {
-        throw error;
+        next(error);
     }
 };

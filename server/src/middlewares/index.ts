@@ -1,7 +1,7 @@
 import express, { type Application } from "express";
 import cors from "cors";
-import routes from "@/routes";
 import { errorHandler, notFound } from "./error.middleware";
+import routes from "../routes";
 
 const app: Application = express();
 

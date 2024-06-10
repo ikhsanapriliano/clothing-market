@@ -1,4 +1,4 @@
-import { ShipperPayload } from "@/types/shipper.type";
+import { ShipperPayload } from "../types/shipper.type";
 import Joi from "joi";
 
 export const shipperPayloadValidation = (

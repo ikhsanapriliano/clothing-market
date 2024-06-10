@@ -3,14 +3,14 @@ import {
     createShipperHandler,
     updateShipperHandler,
     removeShipperHandler,
-} from "@/controllers/shipper.controller";
+} from "../../controllers/shipper.controller";
 import {
     findAllShipper,
     createShipper,
     updateShipper,
     removeShipper,
-} from "@/services/shipper.service";
-import { ResponseType } from "@/types/common.type";
+} from "../../services/shipper.service";
+import { ResponseType } from "../../types/common.type";
 import { Shipper } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 

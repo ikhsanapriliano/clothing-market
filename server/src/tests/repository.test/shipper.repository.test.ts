@@ -3,12 +3,12 @@ import {
     create,
     update,
     remove,
-} from "@/repositories/shipper.repository";
-import { ShipperPayload } from "@/types/shipper.type";
-import prisma from "@/utils/prisma";
+} from "../../repositories/shipper.repository";
+import { ShipperPayload } from "../../types/shipper.type";
+import prisma from "../../utils/prisma";
 import { Shipper } from "@prisma/client";
 
-jest.mock("@/utils/prisma", () => ({
+jest.mock("../../utils/prisma", () => ({
     __esModule: true,
     default: {
         shipper: {

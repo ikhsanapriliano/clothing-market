@@ -1,4 +1,4 @@
-import app from "@/middlewares";
+import app from "./middlewares";
 
 const port = 3000;
 
