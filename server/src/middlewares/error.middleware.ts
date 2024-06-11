@@ -16,11 +16,24 @@ export const errorHandler = (
     };
 
     const message = err.message.split(":");
-    if (message[0] == "400") {
-        response.error = "400 bad request";
-        response.message = message[1];
-
-        res.status(400).json(response);
+    switch (message[0]) {
+        case "400":
+            response.error = "400 bad request";
+            response.message = message[1];
+            res.status(400).json(response);
+            break;
+        case "401":
+            response.error = "401 unauthorized";
+            response.message = message[1];
+            res.status(401).json(response);
+            break;
+        case "403":
+            response.error = "403 forbidden";
+            response.message = message[1];
+            res.status(403).json(response);
+            break;
+        default:
+            break;
     }
 
     res.status(500).json(response);

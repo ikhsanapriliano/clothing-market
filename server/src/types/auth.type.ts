@@ -14,3 +14,8 @@ export interface loginPayload {
     email: string;
     password: string;
 }
+
+export interface tokenPayload {
+    id: string;
+    role: string;
+}
