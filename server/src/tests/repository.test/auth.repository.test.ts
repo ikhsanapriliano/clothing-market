@@ -3,6 +3,8 @@ import { registerPayload } from "../../types/auth.type";
 import prisma from "../../utils/prisma";
 import { login, register, verify } from "../../repositories/auth.repository";
 
+prisma.$transaction = jest.fn().mockImplementation((cb) => cb(prisma));
+
 jest.mock("../../utils/prisma", () => ({
     __esModule: true,
     default: {
@@ -10,6 +12,9 @@ jest.mock("../../utils/prisma", () => ({
             findUnique: jest.fn(),
             create: jest.fn(),
             update: jest.fn(),
+        },
+        profile: {
+            create: jest.fn(),
         },
     },
 }));
@@ -33,7 +38,10 @@ describe("auth repository test", () => {
             updatedAt: new Date(),
         };
 
-        (prisma.user.create as jest.Mock).mockResolvedValue(mockData);
+        await prisma.$transaction(async (prisma) => {
+            (prisma.user.create as jest.Mock).mockResolvedValue(mockData);
+            (prisma.profile.create as jest.Mock).mockResolvedValue(undefined);
+        });
 
         const result = await register(mockPayload);
 

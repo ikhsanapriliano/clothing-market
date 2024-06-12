@@ -5,7 +5,9 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "jest",
-    "dev": "npx nodemon"
+    "dev": "npx nodemon",
+    "seed": "ts-node ./prisma/seeds/seed.ts",
+    "trial": "ts-node ./trial/trial.ts"
   },
   "author": "",
   "license": "ISC",

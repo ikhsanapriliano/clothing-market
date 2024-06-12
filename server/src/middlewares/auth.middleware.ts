@@ -22,6 +22,8 @@ export const authMiddleware = (roles: string[]) => {
             throw new Error(`403:you don't have access authority`);
         }
 
+        res.locals.userId = (payload as JwtPayload).id;
+
         next();
     };
 };

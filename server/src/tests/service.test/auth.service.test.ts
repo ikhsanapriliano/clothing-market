@@ -13,9 +13,11 @@ import {
 import { encrypt } from "../../utils/bcrypt";
 import { generateAccessToken } from "../../utils/jwt";
 import { findById } from "../../repositories/user.repository";
+import { sendVerificationMail } from "../../utils/mailer";
 
 jest.mock("../../repositories/auth.repository");
 jest.mock("../../repositories/user.repository");
+jest.mock("../../utils/mailer");
 
 describe("auth service test", () => {
     it("register user", async () => {
@@ -54,6 +56,7 @@ describe("auth service test", () => {
 
         (findById as jest.Mock).mockResolvedValue(mockUser);
         (verify as jest.Mock).mockResolvedValue(undefined);
+        (sendVerificationMail as jest.Mock).mockResolvedValue(undefined);
 
         const result = await verifyUser(mockId);
 

@@ -17,6 +17,13 @@ enum Gender {
   Female
 }
 
+enum Util {
+  Man
+  Woman
+  Boy
+  Girl
+}
+
 enum Status {
   Pending
   Unpaid
@@ -31,11 +38,11 @@ model Profile {
   photo       String?
   address     String?
   birthDate   String?
-  gender      Gender?
+  gender      Gender   @default(Male)
   userId      String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Chat {
@@ -43,25 +50,55 @@ model Chat {
   message    String
   senderId   String
   receiverId String
+  read       Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  sender     User     @relation("sender", fields: [senderId], references: [id])
-  receiver   User     @relation("receiver", fields: [receiverId], references: [id])
+  sender     User     @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User     @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model Store {
+  id          String   @id @default(uuid())
+  name        String
+  address     String
+  description String
+  photo       String
+  userId      String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cart        Cart[]
+}
+
+model Cart {
+  id         String   @id @default(uuid())
+  quantity   Int
+  productId  String
+  storeId    String
+  userId     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  store      Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id        String   @id @default(uuid())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
-  verified  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  profile   Profile?
-  order     Order[]
-  sender    Chat[]   @relation("sender")
-  receiver  Chat[]   @relation("receiver")
+  id           String   @id @default(uuid())
+  username     String   @unique
+  email        String   @unique
+  password     String
+  role         Role     @default(USER)
+  verified     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  profile      Profile?
+  order        Order[]
+  sender       Chat[]   @relation("sender")
+  receiver     Chat[]   @relation("receiver")
+  notification Notification[]
+  store        Store?
+  cart         Cart[]
 }
 
 model ProductPhoto {
@@ -70,12 +107,12 @@ model ProductPhoto {
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Category {
   id        String    @id @default(uuid())
-  name      String
+  name      String @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   product   Product[]
@@ -87,25 +124,26 @@ model Size {
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Color {
   id        String   @id @default(uuid())
   name      String
+  code      String
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Utility {
   id        String   @id @default(uuid())
-  name      String
+  name      Util
   productId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Product {
@@ -117,12 +155,13 @@ model Product {
   categoryId    String
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  category      Category       @relation(fields: [categoryId], references: [id])
+  category      Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   productPhotos ProductPhoto[]
   size          Size[]
   color         Color[]
   utility       Utility[]
   orderDetail   OrderDetail[]
+  cart          Cart[]
 }
 
 model Shipper {
@@ -143,9 +182,9 @@ model OrderDetail {
   orderId    String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  product    Product  @relation(fields: [productId], references: [id])
-  shipper    Shipper  @relation(fields: [shipperId], references: [id])
-  order      Order    @relation(fields: [orderId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  shipper    Shipper  @relation(fields: [shipperId], references: [id], onDelete: Cascade)
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
 
 model Order {
@@ -156,6 +195,16 @@ model Order {
   userId       String
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  user         User          @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   orderDetail  OrderDetail[]
+}
+
+model Notification {
+  id           String        @id @default(uuid())
+  title        String
+  message      String
+  userId String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
