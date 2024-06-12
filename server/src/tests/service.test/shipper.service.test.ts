@@ -14,7 +14,7 @@ import {
 import { Shipper } from "@prisma/client";
 import { ShipperPayload } from "../../types/shipper.type";
 
-jest.mock("@/repositories/shipper.repository");
+jest.mock("../../repositories/shipper.repository");
 
 describe("shipper service test", () => {
     it("find all shipper", async () => {

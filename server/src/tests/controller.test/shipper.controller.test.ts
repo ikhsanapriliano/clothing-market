@@ -12,9 +12,9 @@ import {
 } from "../../services/shipper.service";
 import { ResponseType } from "../../types/common.type";
 import { Shipper } from "@prisma/client";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 
-jest.mock("@/services/shipper.service");
+jest.mock("../../services/shipper.service");
 
 describe("shipper controller test", () => {
     it("find all shipper handler", async () => {

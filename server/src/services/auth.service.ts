@@ -26,7 +26,7 @@ export const registerUser = async (payload: registerInput): Promise<string> => {
 
     const id = await register(user);
 
-    const info = await sendVerificationMail(user.email, id);
+    await sendVerificationMail(user.email, id);
 
     const data = `register success, please check your email for verification`;
 
@@ -49,6 +49,10 @@ export const loginUser = async (payload: loginPayload): Promise<string> => {
 
     const user = await login(value.email);
     if (user == null) throw new Error(`400:wrong email`);
+    if (!user.verified)
+        throw new Error(
+            `400:you are not verified, please veirfy your account first`
+        );
 
     const passwordCheck = compare(value.password, user.password);
     if (!passwordCheck) throw new Error(`400:wrong password`);
