@@ -10,7 +10,7 @@ import {
     changePasswordPayloadValidation,
     profilePayloadValidation,
 } from "../validations/user.validation";
-import { compare } from "../utils/bcrypt";
+import { compare, encrypt } from "../utils/bcrypt";
 
 export const findByIdUser = async (id: string): Promise<User> => {
     const data = await findById(id);
@@ -34,7 +34,7 @@ export const changePassword = async (
         if (user == null) throw new Error(`400:password wrong`);
     }
 
-    await change(id, value.newPassword);
+    await change(id, encrypt(value.newPassword));
     const data = "change password success";
 
     return data;
