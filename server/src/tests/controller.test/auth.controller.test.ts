@@ -70,7 +70,9 @@ describe("auth controller test", () => {
         const mockResponse: ResponseType = {
             status: 200,
             message: "success",
-            data: mockData,
+            data: {
+                token: mockData,
+            },
         };
 
         const mockReq: Request = {} as Request;

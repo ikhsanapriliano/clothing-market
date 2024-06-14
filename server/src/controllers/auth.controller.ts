@@ -60,7 +60,9 @@ export const loginUserHandler = async (
         const response: ResponseType = {
             status: 200,
             message: "success",
-            data,
+            data: {
+                token: data,
+            },
         };
 
         return res.json(response);

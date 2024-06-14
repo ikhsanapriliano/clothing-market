@@ -11,8 +11,8 @@ import {
 } from "../validations/auth.validation";
 import { compare, encrypt } from "../utils/bcrypt";
 import { sendVerificationMail } from "../utils/mailer";
-import { findById } from "../repositories/user.repository";
 import { generateAccessToken } from "../utils/jwt";
+import { findByIdUser } from "./user.service";
 
 export const registerUser = async (payload: registerInput): Promise<string> => {
     const { value, error } = registerPayloadValidation(payload);
@@ -34,8 +34,7 @@ export const registerUser = async (payload: registerInput): Promise<string> => {
 };
 
 export const verifyUser = async (id: string): Promise<string> => {
-    const user = await findById(id);
-    if (user == null) throw new Error(`user with id ${id} not found`);
+    await findByIdUser(id);
 
     await verify(id);
     const data = `verification success`;

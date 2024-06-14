@@ -12,11 +12,11 @@ import {
 } from "../../types/auth.type";
 import { encrypt } from "../../utils/bcrypt";
 import { generateAccessToken } from "../../utils/jwt";
-import { findById } from "../../repositories/user.repository";
 import { sendVerificationMail } from "../../utils/mailer";
+import { findByIdUser } from "../../services/user.service";
 
 jest.mock("../../repositories/auth.repository");
-jest.mock("../../repositories/user.repository");
+jest.mock("../../services/user.service");
 jest.mock("../../utils/mailer");
 
 describe("auth service test", () => {
@@ -54,7 +54,7 @@ describe("auth service test", () => {
 
         const mockData = "verification success";
 
-        (findById as jest.Mock).mockResolvedValue(mockUser);
+        (findByIdUser as jest.Mock).mockResolvedValue(mockUser);
         (verify as jest.Mock).mockResolvedValue(undefined);
         (sendVerificationMail as jest.Mock).mockResolvedValue(undefined);
 
