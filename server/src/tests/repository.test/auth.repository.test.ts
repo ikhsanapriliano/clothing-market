@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { registerPayload } from "../../types/auth.type";
+import { RegisterPayload } from "../../types/auth.type";
 import prisma from "../../utils/prisma";
 import { login, register, verify } from "../../repositories/auth.repository";
 
@@ -21,7 +21,7 @@ jest.mock("../../utils/prisma", () => ({
 
 describe("auth repository test", () => {
     it("register", async () => {
-        const mockPayload: registerPayload = {
+        const mockPayload: RegisterPayload = {
             username: "1",
             email: "1",
             password: "1",

@@ -1,8 +1,8 @@
 import prisma from "../utils/prisma";
-import { registerPayload } from "../types/auth.type";
+import { RegisterPayload } from "../types/auth.type";
 import { User } from "@prisma/client";
 
-export const register = async (payload: registerPayload): Promise<string> => {
+export const register = async (payload: RegisterPayload): Promise<string> => {
     const data = await prisma.$transaction(async (prisma) => {
         const user = await prisma.user.create({
             data: {

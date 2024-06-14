@@ -1,9 +1,9 @@
 import "dotenv/config";
 import jsonWebToken, { JwtPayload } from "jsonwebtoken";
-import { tokenPayload } from "../types/auth.type";
-import { verifyTokentype } from "../types/jwt.type";
+import { TokenPayload } from "../types/auth.type";
+import { VerifyTokentype } from "../types/jwt.type";
 
-export const generateAccessToken = (user: tokenPayload): string => {
+export const generateAccessToken = (user: TokenPayload): string => {
     const token = jsonWebToken.sign(user, String(process.env.JWT_SECRET), {
         expiresIn:
             process.env.JWT_EXPIRES_IN != null
@@ -14,8 +14,8 @@ export const generateAccessToken = (user: tokenPayload): string => {
     return token;
 };
 
-export const verifyAccessToken = (token: string): verifyTokentype => {
-    let data: verifyTokentype;
+export const verifyAccessToken = (token: string): VerifyTokentype => {
+    let data: VerifyTokentype;
 
     try {
         const payload = jsonWebToken.verify(

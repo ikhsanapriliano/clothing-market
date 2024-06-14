@@ -5,7 +5,7 @@ import {
     remove,
     update,
 } from "../repositories/user.repository";
-import { changePasswordPayload, profilePayload } from "../types/user.type";
+import { ChangePasswordPayload, ProfilePayload } from "../types/user.type";
 import {
     changePasswordPayloadValidation,
     profilePayloadValidation,
@@ -22,7 +22,7 @@ export const findByIdUser = async (id: string): Promise<User> => {
 
 export const changePassword = async (
     id: string,
-    payload: changePasswordPayload
+    payload: ChangePasswordPayload
 ): Promise<string> => {
     const { value, error } = changePasswordPayloadValidation(payload);
     if (error != undefined) throw new Error(`400:${error.message}`);
@@ -42,7 +42,7 @@ export const changePassword = async (
 
 export const updateProfile = async (
     userId: string,
-    payload: profilePayload
+    payload: ProfilePayload
 ): Promise<string> => {
     const { value, error } = profilePayloadValidation(payload);
     if (error != undefined) throw new Error(`400:${error.message}`);

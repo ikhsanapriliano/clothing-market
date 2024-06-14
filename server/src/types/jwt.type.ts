@@ -1,6 +1,6 @@
 import { JwtPayload } from "jsonwebtoken";
 
-export interface verifyTokentype {
+export interface VerifyTokentype {
     payload: string | JwtPayload;
     error: Error | unknown | null;
 }

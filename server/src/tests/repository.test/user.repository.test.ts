@@ -6,7 +6,7 @@ import {
     remove,
     update,
 } from "../../repositories/user.repository";
-import { profilePayload } from "../../types/user.type";
+import { ProfilePayload } from "../../types/user.type";
 
 prisma.$transaction = jest.fn().mockImplementation((cb) => cb(prisma));
 
@@ -57,7 +57,7 @@ describe("user repository test", () => {
 
     it("update", async () => {
         const mockId = "1";
-        const mockPayload: profilePayload = {};
+        const mockPayload: ProfilePayload = {};
 
         await prisma.$transaction(async (prisma) => {
             (prisma.user.update as jest.Mock).mockResolvedValue(undefined);

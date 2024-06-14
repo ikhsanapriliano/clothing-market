@@ -6,9 +6,9 @@ import {
     verifyUser,
 } from "../../services/auth.service";
 import {
-    loginPayload,
-    registerInput,
-    tokenPayload,
+    LoginPayload,
+    RegisterInput,
+    TokenPayload,
 } from "../../types/auth.type";
 import { encrypt } from "../../utils/bcrypt";
 import { generateAccessToken } from "../../utils/jwt";
@@ -18,10 +18,11 @@ import { findByIdUser } from "../../services/user.service";
 jest.mock("../../repositories/auth.repository");
 jest.mock("../../services/user.service");
 jest.mock("../../utils/mailer");
+jest.mock("../../utils/jwt");
 
 describe("auth service test", () => {
     it("register user", async () => {
-        const mockPayload: registerInput = {
+        const mockPayload: RegisterInput = {
             email: "abc@gmail.com",
             password: "123456",
             confirmPassword: "123456",
@@ -64,11 +65,10 @@ describe("auth service test", () => {
     });
 
     it("login user", async () => {
-        const mockPayload: loginPayload = {
+        const mockPayload: LoginPayload = {
             email: "abc@gmail.com",
             password: "123456",
         };
-
         const mockData: User = {
             id: "1",
             username: "1",
@@ -79,17 +79,12 @@ describe("auth service test", () => {
             createdAt: new Date(),
             updatedAt: new Date(),
         };
+        const mockToken = "1";
 
         (login as jest.Mock).mockResolvedValue(mockData);
-
-        const tokenPayload: tokenPayload = {
-            id: mockData.id,
-            role: mockData.role,
-        };
-        const token = generateAccessToken(tokenPayload);
+        (generateAccessToken as jest.Mock).mockResolvedValue(mockToken);
 
         const result = await loginUser(mockPayload);
-
-        expect(result).toEqual(token);
+        expect(result).toEqual(mockToken);
     });
 });

@@ -1,21 +1,21 @@
-export interface registerInput {
+export interface RegisterInput {
     email: string;
     password: string;
     confirmPassword: string;
 }
 
-export interface registerPayload {
+export interface RegisterPayload {
     username: string;
     email: string;
     password: string;
 }
 
-export interface loginPayload {
+export interface LoginPayload {
     email: string;
     password: string;
 }
 
-export interface tokenPayload {
+export interface TokenPayload {
     id: string;
     role: string;
 }

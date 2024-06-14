@@ -1,9 +1,9 @@
 import Joi from "joi";
-import { loginPayload, registerInput } from "../types/auth.type";
+import { LoginPayload, RegisterInput } from "../types/auth.type";
 
 export const registerPayloadValidation = (
-    payload: registerInput
-): Joi.ValidationResult<registerInput> => {
+    payload: RegisterInput
+): Joi.ValidationResult<RegisterInput> => {
     const schema = Joi.object({
         email: Joi.string().trim().email().required(),
         password: Joi.string().trim().min(6).required(),
@@ -18,8 +18,8 @@ export const registerPayloadValidation = (
 };
 
 export const loginPayloadValidation = (
-    payload: loginPayload
-): Joi.ValidationResult<loginPayload> => {
+    payload: LoginPayload
+): Joi.ValidationResult<LoginPayload> => {
     const schema = Joi.object({
         email: Joi.string().trim().email().required(),
         password: Joi.string().trim().min(6).required(),

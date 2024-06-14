@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import prisma from "../utils/prisma";
-import { profilePayload } from "../types/user.type";
+import { ProfilePayload } from "../types/user.type";
 
 export const findById = async (id: string): Promise<User | null> => {
     const data = await prisma.user.findUnique({
@@ -28,7 +28,7 @@ export const change = async (id: string, password: string): Promise<void> => {
 
 export const update = async (
     userId: string,
-    payload: profilePayload
+    payload: ProfilePayload
 ): Promise<void> => {
     await prisma.$transaction(async (prisma) => {
         await prisma.user.update({

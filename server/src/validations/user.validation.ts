@@ -1,10 +1,10 @@
 import { ShipperPayload } from "../types/shipper.type";
 import Joi from "joi";
-import { changePasswordPayload, profilePayload } from "../types/user.type";
+import { ChangePasswordPayload, ProfilePayload } from "../types/user.type";
 
 export const changePasswordPayloadValidation = (
-    payload: changePasswordPayload
-): Joi.ValidationResult<changePasswordPayload> => {
+    payload: ChangePasswordPayload
+): Joi.ValidationResult<ChangePasswordPayload> => {
     const schema = Joi.object({
         currentPassword: Joi.string().trim().min(6).required(),
         newPassword: Joi.string().trim().min(6).required(),
@@ -14,8 +14,8 @@ export const changePasswordPayloadValidation = (
 };
 
 export const profilePayloadValidation = (
-    payload: profilePayload
-): Joi.ValidationResult<profilePayload> => {
+    payload: ProfilePayload
+): Joi.ValidationResult<ProfilePayload> => {
     const schema = Joi.object({
         username: Joi.string().trim(),
         firstName: Joi.string().trim(),

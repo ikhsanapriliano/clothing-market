@@ -6,7 +6,7 @@ import {
     updateProfile,
 } from "../services/user.service";
 import { ResponseType } from "../types/common.type";
-import { changePasswordPayload, profilePayload } from "../types/user.type";
+import { ChangePasswordPayload, ProfilePayload } from "../types/user.type";
 
 export const findByIdUserHandler = async (
     req: Request,
@@ -37,7 +37,7 @@ export const changePasswordHandler = async (
 ): Promise<Response | undefined> => {
     try {
         const id = res.locals.userId;
-        const payload: changePasswordPayload = req.body;
+        const payload: ChangePasswordPayload = req.body;
 
         const data = await changePassword(id, payload);
 
@@ -60,7 +60,7 @@ export const updateProfileHandler = async (
 ): Promise<Response | undefined> => {
     try {
         const id = res.locals.userId;
-        const payload: profilePayload = req.body;
+        const payload: ProfilePayload = req.body;
 
         const data = await updateProfile(id, payload);
 

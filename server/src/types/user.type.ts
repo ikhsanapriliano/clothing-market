@@ -3,7 +3,7 @@ enum Gender {
     Female = "Female",
 }
 
-export interface profilePayload {
+export interface ProfilePayload {
     username?: string;
     firstName?: string;
     lastName?: string;
@@ -14,7 +14,7 @@ export interface profilePayload {
     gender?: Gender;
 }
 
-export interface changePasswordPayload {
+export interface ChangePasswordPayload {
     currentPassword: string;
     newPassword: string;
 }

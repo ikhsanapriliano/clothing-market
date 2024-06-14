@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { loginUser, registerUser, verifyUser } from "../services/auth.service";
-import { loginPayload, registerInput } from "../types/auth.type";
+import { LoginPayload, RegisterInput } from "../types/auth.type";
 import { ResponseType } from "../types/common.type";
 
 export const registerUserHandler = async (
@@ -9,7 +9,7 @@ export const registerUserHandler = async (
     next: NextFunction
 ): Promise<Response | undefined> => {
     try {
-        const payload: registerInput = req.body;
+        const payload: RegisterInput = req.body;
 
         const data = await registerUser(payload);
 
@@ -53,7 +53,7 @@ export const loginUserHandler = async (
     next: NextFunction
 ): Promise<Response | undefined> => {
     try {
-        const payload: loginPayload = req.body;
+        const payload: LoginPayload = req.body;
 
         const data = await loginUser(payload);
 

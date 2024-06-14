@@ -11,7 +11,7 @@ import {
     removeUser,
     updateProfile,
 } from "../../services/user.service";
-import { changePasswordPayload, profilePayload } from "../../types/user.type";
+import { ChangePasswordPayload, ProfilePayload } from "../../types/user.type";
 import { encrypt } from "../../utils/bcrypt";
 
 jest.mock("../../repositories/user.repository");
@@ -40,7 +40,7 @@ describe("user service test", () => {
 
     it("change password", async () => {
         const mockId = "1";
-        const mockPayload: changePasswordPayload = {
+        const mockPayload: ChangePasswordPayload = {
             currentPassword: "111111",
             newPassword: "222222",
         };
@@ -68,7 +68,7 @@ describe("user service test", () => {
 
     it("update profile", async () => {
         const mockId = "1";
-        const mockPayload: profilePayload = {};
+        const mockPayload: ProfilePayload = {};
 
         const mockUser: User = {
             id: mockId,

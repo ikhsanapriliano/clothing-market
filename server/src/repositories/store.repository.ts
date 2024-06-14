@@ -18,6 +18,16 @@ export const findById = async (id: string): Promise<Store | null> => {
     return data;
 };
 
+export const findByUserId = async (userId: string): Promise<Store | null> => {
+    const data = await prisma.store.findUnique({
+        where: {
+            userId,
+        },
+    });
+
+    return data;
+};
+
 export const create = async (
     userId: string,
     payload: StorePayload

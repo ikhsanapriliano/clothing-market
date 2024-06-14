@@ -1,9 +1,9 @@
 import { login, register, verify } from "../repositories/auth.repository";
 import {
-    loginPayload,
-    registerInput,
-    registerPayload,
-    tokenPayload,
+    LoginPayload,
+    RegisterInput,
+    RegisterPayload,
+    TokenPayload,
 } from "../types/auth.type";
 import {
     loginPayloadValidation,
@@ -14,11 +14,11 @@ import { sendVerificationMail } from "../utils/mailer";
 import { generateAccessToken } from "../utils/jwt";
 import { findByIdUser } from "./user.service";
 
-export const registerUser = async (payload: registerInput): Promise<string> => {
+export const registerUser = async (payload: RegisterInput): Promise<string> => {
     const { value, error } = registerPayloadValidation(payload);
     if (error != undefined) throw new Error(`400:${error.message}`);
 
-    const user: registerPayload = {
+    const user: RegisterPayload = {
         username: value.email.split("@")[0],
         email: value.email,
         password: encrypt(value.password),
@@ -42,7 +42,7 @@ export const verifyUser = async (id: string): Promise<string> => {
     return data;
 };
 
-export const loginUser = async (payload: loginPayload): Promise<string> => {
+export const loginUser = async (payload: LoginPayload): Promise<string> => {
     const { value, error } = loginPayloadValidation(payload);
     if (error != undefined) throw new Error(`400:${error.message}`);
 
@@ -56,7 +56,7 @@ export const loginUser = async (payload: loginPayload): Promise<string> => {
     const passwordCheck = compare(value.password, user.password);
     if (!passwordCheck) throw new Error(`400:wrong password`);
 
-    const tokenPayload: tokenPayload = {
+    const tokenPayload: TokenPayload = {
         id: user.id,
         role: user.role,
     };
