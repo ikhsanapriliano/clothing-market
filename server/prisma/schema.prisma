@@ -68,6 +68,7 @@ model Store {
   updatedAt   DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   cart        Cart[]
+  product     Product[]
 }
 
 model Cart {
@@ -112,7 +113,7 @@ model ProductPhoto {
 
 model Category {
   id        String    @id @default(uuid())
-  name      String @unique
+  name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   product   Product[]
@@ -153,9 +154,11 @@ model Product {
   price         Int
   stock         Int
   categoryId    String
+  storeId       String
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   category      Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  store         Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
   productPhotos ProductPhoto[]
   size          Size[]
   color         Color[]
