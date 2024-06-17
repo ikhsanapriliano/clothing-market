@@ -21,7 +21,7 @@ import {
     productInputCreateValidation,
     productInputUpdateValidation,
 } from "../validations/product.validation";
-import { findByUserIdStore } from "./store.service";
+import { findByIdStore, findByUserIdStore } from "./store.service";
 import { findByNameCategory } from "./category.service";
 
 export const findAllProduct = async (): Promise<Product[]> => {
@@ -40,6 +40,7 @@ export const findByIdProduct = async (id: string): Promise<Product> => {
 export const findByStoreIdProduct = async (
     storeId: string
 ): Promise<Product[]> => {
+    await findByIdStore(storeId);
     const data = await findByStoreId(storeId);
 
     return data;
@@ -62,6 +63,9 @@ export const createProduct = async (
 ): Promise<string> => {
     const { value, error } = productInputCreateValidation(payload);
     if (error !== undefined) throw new Error(`400:${error.message}`);
+
+    const category = await findByNameCategory(value.category);
+    value.category = category.id;
 
     const store = await findByUserIdStore(userId);
 
@@ -112,7 +116,7 @@ export const updateProduct = async (
 
     if (value.utility !== undefined) {
         utilities = value.utility.map((utility) => ({
-            id: utility.id,
+            id: utility.id !== undefined ? utility.id : "create",
             name: utility.name,
             productId: id,
         }));
@@ -120,7 +124,7 @@ export const updateProduct = async (
 
     if (value.color !== undefined) {
         colors = value.color.map((color) => ({
-            id: color.id,
+            id: color.id !== undefined ? color.id : "create",
             name: color.name,
             code: color.code,
             productId: id,
@@ -129,7 +133,7 @@ export const updateProduct = async (
 
     if (value.size !== undefined) {
         sizes = value.size.map((size) => ({
-            id: size.id,
+            id: size.id !== undefined ? size.id : "create",
             name: size.name,
             productId: id,
         }));
@@ -137,7 +141,7 @@ export const updateProduct = async (
 
     if (value.photo !== undefined) {
         photos = value.photo.map((photo) => ({
-            id: photo.id,
+            id: photo.id !== undefined ? photo.id : "create",
             photo: photo.photo,
             productId: id,
         }));

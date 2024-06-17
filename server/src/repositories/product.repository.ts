@@ -160,10 +160,10 @@ export const update = async (
         }
 
         if (utilities !== undefined) {
-            utilities.forEach(async (utility) => {
+            for (const utility of utilities) {
                 await prisma.utility.upsert({
                     where: {
-                        id: utility.id,
+                        id: utility.id as string,
                     },
                     update: {
                         name: utility.name,
@@ -173,14 +173,14 @@ export const update = async (
                         productId: utility.productId,
                     },
                 });
-            });
+            }
         }
 
         if (colors !== undefined) {
-            colors.forEach(async (color) => {
+            for (const color of colors) {
                 await prisma.color.upsert({
                     where: {
-                        id: color.id,
+                        id: color.id as string,
                     },
                     update: {
                         name: color.name,
@@ -192,14 +192,14 @@ export const update = async (
                         productId: color.productId,
                     },
                 });
-            });
+            }
         }
 
         if (sizes !== undefined) {
-            sizes.forEach(async (size) => {
+            for (const size of sizes) {
                 await prisma.size.upsert({
                     where: {
-                        id: size.id,
+                        id: size.id as string,
                     },
                     update: {
                         name: size.name,
@@ -209,14 +209,14 @@ export const update = async (
                         productId: size.productId,
                     },
                 });
-            });
+            }
         }
 
         if (photos !== undefined) {
-            photos.forEach(async (photo) => {
+            for (const photo of photos) {
                 await prisma.productPhoto.upsert({
                     where: {
-                        id: photo.id,
+                        id: photo.id as string,
                     },
                     update: {
                         photo: photo.photo,
@@ -226,7 +226,7 @@ export const update = async (
                         productId: photo.productId,
                     },
                 });
-            });
+            }
         }
     });
 };
