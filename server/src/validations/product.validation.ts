@@ -55,7 +55,7 @@ export const productInputUpdateValidation = (
         photo: Joi.array().items(
             Joi.object({
                 id: Joi.string().trim(),
-                name: Joi.string().required(),
+                photo: Joi.string().required(),
             })
         ),
         color: Joi.array().items(
