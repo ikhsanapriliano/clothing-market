@@ -6,6 +6,7 @@ import {
     removeCart,
 } from "../services/cart.service";
 import { ResponseType } from "../types/common.type";
+import { CartPayload } from "../types/cart.type";
 
 export const findByUserIdCartHandler = async (
     req: Request,
@@ -57,7 +58,7 @@ export const createOrUpdateCartHandler = async (
 ): Promise<Response | undefined> => {
     try {
         const userId = res.locals.userId;
-        const payload = req.body;
+        const payload: CartPayload = req.body;
 
         const data = await createOrUpdateCart(userId, payload);
         const response: ResponseType = {

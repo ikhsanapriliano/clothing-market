@@ -10,6 +10,7 @@ import {
 import { CartPayload } from "../types/cart.type";
 import { findByIdProduct } from "./product.service";
 import { cartPayloadValidation } from "../validations/cart.validation";
+import { findByIdStore } from "./store.service";
 
 export const findByUserIdCart = async (userId: string): Promise<Cart[]> => {
     const data = await findByUserId(userId);
@@ -21,6 +22,7 @@ export const findByUserIdAndProductIdCart = async (
     userId: string,
     productId: string
 ): Promise<Cart | null> => {
+    await findByIdProduct(productId);
     const data = await findByUserIdAndProductId(userId, productId);
 
     return data;
@@ -30,10 +32,15 @@ export const createOrUpdateCart = async (
     userId: string,
     payload: CartPayload
 ): Promise<string> => {
-    const product = await findByIdProduct(payload.productId);
+    let stock = 100000;
+    if (payload.productId !== undefined && payload.storeId !== undefined) {
+        const product = await findByIdProduct(payload.productId);
+        stock = product.stock;
+        await findByIdStore(payload.storeId);
+    }
 
-    const { value, error } = cartPayloadValidation(payload, product.stock);
-    if (error !== undefined) throw new Error(`400${error.message}`);
+    const { value, error } = cartPayloadValidation(payload, stock);
+    if (error !== undefined) throw new Error(`400:${error.message}`);
 
     const cart = await findByUserIdAndProductIdCart(userId, payload.productId);
 
@@ -52,7 +59,7 @@ export const removeCart = async (
     id: string,
     userId: string
 ): Promise<string> => {
-    const cart = findByIdAndUserId(id, userId);
+    const cart = await findByIdAndUserId(id, userId);
     if (cart === null)
         throw new Error(`400:you don't have the product in your cart`);
 
