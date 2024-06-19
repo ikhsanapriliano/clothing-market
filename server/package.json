@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "npx nodemon",
-    "seed": "ts-node ./prisma/seeds/seed.ts",
+    "seed": "ts-node ./prisma/seeds/seed.ts && ts-node ./mongoose/seeds/seed.ts",
     "trial": "ts-node ./trial/trial.ts"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "express": "^4.19.2",
     "joi": "^17.13.1",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.3",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.13",
     "winston": "^3.13.0",
@@ -32,6 +33,7 @@
     "@types/jest": "^29.5.12",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.12.12",
     "@types/nodemailer": "^6.4.15",

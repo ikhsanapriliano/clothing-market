@@ -9,7 +9,7 @@ const seed = async (): Promise<void> => {
         await categorySeeder(prisma);
         await shipperSeeder(prisma);
 
-        console.log("seeding complete");
+        console.log("prisma seeding complete");
     } catch (error: Error | unknown) {
         console.log(`seed error: ${(error as Error).message}`);
     }
