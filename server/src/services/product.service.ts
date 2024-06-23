@@ -23,6 +23,7 @@ import {
 } from "../validations/product.validation";
 import { findByIdStore, findByUserIdStore } from "./store.service";
 import { findByNameCategory } from "./category.service";
+import { createReview } from "./review.service";
 
 export const findAllProduct = async (): Promise<Product[]> => {
     const data = await findAll();
@@ -69,7 +70,8 @@ export const createProduct = async (
 
     const store = await findByUserIdStore(userId);
 
-    await create(store.id, value);
+    const productId = await create(store.id, value);
+    await createReview(productId);
     const data = `product successfully created`;
 
     return data;

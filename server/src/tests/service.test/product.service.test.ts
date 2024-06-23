@@ -22,10 +22,12 @@ import {
     ProductInputUpdate,
 } from "../../types/product.type";
 import { findByNameCategory } from "../../services/category.service";
+import { createReview } from "../../services/review.service";
 
 jest.mock("../../repositories/product.repository");
 jest.mock("../../services/store.service");
 jest.mock("../../services/category.service");
+jest.mock("../../services/review.service");
 
 describe("product service test", () => {
     it("find all product", async () => {
@@ -93,7 +95,8 @@ describe("product service test", () => {
         (findByUserIdStore as jest.Mock).mockResolvedValue({
             id: "1",
         } as unknown as Store);
-        create as jest.Mock;
+        (create as jest.Mock).mockResolvedValue("1");
+        createReview as jest.Mock;
 
         const result = await createProduct(mockUserId, mockPayload);
         expect(result).toEqual(mockData);

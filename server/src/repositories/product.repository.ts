@@ -81,8 +81,8 @@ export const findByIdAndStoreId = async (
 export const create = async (
     storeId: string,
     payload: ProductInputCreate
-): Promise<void> => {
-    await prisma.$transaction(async (prisma) => {
+): Promise<string> => {
+    const productId = await prisma.$transaction(async (prisma) => {
         const { id } = await prisma.product.create({
             data: {
                 name: payload.name,
@@ -133,7 +133,11 @@ export const create = async (
         await prisma.productPhoto.createMany({
             data: photos,
         });
+
+        return id;
     });
+
+    return productId;
 };
 
 export const update = async (
