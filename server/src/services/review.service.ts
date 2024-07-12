@@ -39,7 +39,10 @@ export const addReview = async (
     const { value, error } = reviewPayloadValidation(payload);
     if (error !== undefined) throw new Error(`400:${error.message}`);
 
-    const review = findByProductIdAndUserIdReview(payload.productId, userId);
+    const review = await findByProductIdAndUserIdReview(
+        payload.productId,
+        userId
+    );
     if (review !== undefined)
         throw new Error("400:you already give a review for this product");
 
