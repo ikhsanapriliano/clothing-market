@@ -1,0 +1,16 @@
+@keyframes utility-hovered {
+    from {
+        opacity: 0;
+        bottom: 300px;
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1;
+    }
+}
+
+.utility-hovered {
+    animation-name: utility-hovered;
+    animation-duration: 0.3s;
+}

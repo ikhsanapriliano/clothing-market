@@ -1,9 +1,13 @@
-import ManImage from "../../assets/utility/man.jpg"
-import WomanImage from "../../assets/utility/woman.jpg"
-import BoyImage from "../../assets/utility/boy.jpg"
-import GirlImage from "../../assets/utility/girl.jpg"
+import ManImage from "../assets/img/utility/man.jpg"
+import WomanImage from "../assets/img/utility/woman.jpg"
+import BoyImage from "../assets/img/utility/boy.jpg"
+import GirlImage from "../assets/img/utility/girl.jpg"
+import "../assets/css/utility.css"
+import { useState } from "react"
 
 const Utility = () => {
+    const [hovered, setHovered] = useState("")
+
     const utilities = [
         {
             image: ManImage,
@@ -33,8 +37,14 @@ const Utility = () => {
                 <div className="flex justify-center gap-[40px]">
                     {
                         utilities.map((utility, index) => (
-                            <div key={index}>
-                                <img className="rounded-[10px]" src={utility.image} />
+                            <div
+                                onMouseEnter={() => { setHovered(utility.title) }}
+                                onMouseLeave={() => { setHovered("") }}
+                                key={index} className="relative rounded-[10px] overflow-hidden cursor-pointer">
+                                {hovered === utility.title && <div className="utility-hovered absolute inset-0 bg-black bg-opacity-70 text-white flex justify-center items-center">
+                                    {utility.title}
+                                </div>}
+                                <img src={utility.image} />
                             </div>
                         ))
                     }
