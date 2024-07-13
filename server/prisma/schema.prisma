@@ -153,6 +153,7 @@ model Product {
   description   String
   price         Int
   stock         Int
+  sold          Int            @default(0)
   categoryId    String
   storeId       String
   createdAt     DateTime       @default(now())

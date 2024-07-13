@@ -25,8 +25,8 @@ import { findByIdStore, findByUserIdStore } from "./store.service";
 import { findByNameCategory } from "./category.service";
 import { createReview } from "./review.service";
 
-export const findAllProduct = async (): Promise<Product[]> => {
-    const data = await findAll();
+export const findAllProduct = async (limit?: number): Promise<Product[]> => {
+    let data = await findAll(limit ? limit : undefined);
 
     return data;
 };

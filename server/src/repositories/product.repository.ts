@@ -1,4 +1,4 @@
-import { Product, Util } from "@prisma/client";
+import { Prisma, Product, Util } from "@prisma/client";
 import prisma from "../utils/prisma";
 import {
     ColorPayload,
@@ -9,16 +9,18 @@ import {
     UtilityPayload,
 } from "../types/product.type";
 
-export const findAll = async (): Promise<Product[]> => {
-    const data = await prisma.product.findMany({
+export const findAll = async (limit?: number): Promise<Product[]> => {
+    let config: Prisma.ProductFindManyArgs = {
         include: {
-            category: true,
-            utility: true,
-            size: true,
             productPhotos: true,
-            color: true,
         },
-    });
+    };
+
+    if (limit) {
+        config.take = limit;
+    }
+
+    const data = await prisma.product.findMany(config);
 
     return data;
 };

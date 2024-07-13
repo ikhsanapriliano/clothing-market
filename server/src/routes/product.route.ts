@@ -11,7 +11,7 @@ import {
 
 const productRoute = Router();
 
-productRoute.get("/", authMiddleware(["ADMIN", "USER"]), findAllProductHandler);
+productRoute.get("/", findAllProductHandler);
 productRoute.get(
     "/:id",
     authMiddleware(["ADMIN", "USER"]),

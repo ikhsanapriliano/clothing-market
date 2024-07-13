@@ -15,7 +15,9 @@ export const findAllProductHandler = async (
     next: NextFunction
 ): Promise<Response | undefined> => {
     try {
-        const data = await findAllProduct();
+        const limit: number = Number(req.query.limit);
+
+        const data = await findAllProduct(limit ? limit : undefined);
         const response: ResponseType = {
             status: 200,
             message: "success",
