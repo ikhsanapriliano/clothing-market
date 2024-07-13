@@ -1,0 +1,60 @@
+@keyframes swipe-right {
+    to {
+        transform: translate(-880px);
+    }
+}
+
+@keyframes swipe-left {
+    to {
+        transform: translate(880px);
+    }
+}
+
+@keyframes mid-to-side {
+    from {
+        height: 250px;
+        
+    }
+
+    to {
+        height: 210px;
+    }
+}
+
+
+@keyframes side-to-mid {
+    from {
+        height: 210px;
+        
+    }
+
+    to {
+        height: 250px;
+    }
+}
+
+/* swipe right */
+.mid-banner-right {
+    animation: swipe-right 300ms ease-in, mid-to-side 300ms ease-in;
+}
+
+.right-banner-right {
+    animation: swipe-right 300ms ease-in, side-to-mid 300ms ease-in;
+}
+
+.left-banner-right {
+    animation: swipe-right 300ms ease-in;
+}
+
+/* swipe left */
+.mid-banner-left {
+    animation: swipe-left 300ms ease-in, mid-to-side 300ms ease-in;
+}
+
+.right-banner-left {
+    animation: swipe-left 300ms ease-in;
+}
+
+.left-banner-left {
+    animation: swipe-left 300ms ease-in, side-to-mid 300ms ease-in;
+}
