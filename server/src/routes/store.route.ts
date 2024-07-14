@@ -10,7 +10,7 @@ import {
 
 const storeRoute = Router();
 
-storeRoute.get("/", authMiddleware(["ADMIN", "USER"]), findAllStoreHandler);
+storeRoute.get("/", findAllStoreHandler);
 storeRoute.get("/:id", authMiddleware(["ADMIN", "USER"]), findByIdStoreHandler);
 storeRoute.post("/", authMiddleware(["ADMIN", "USER"]), createStoreHandler);
 storeRoute.patch("/", authMiddleware(["ADMIN", "USER"]), updateStoreHandler);

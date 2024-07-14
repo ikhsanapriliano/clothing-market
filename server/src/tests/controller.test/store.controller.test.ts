@@ -30,7 +30,11 @@ describe("store controller test", () => {
             data: mockData,
         };
 
-        const mockReq: Request = {} as Request;
+        const mockReq: Request = {
+            query: {
+                limit: "1",
+            },
+        } as unknown as Request;
         const mockRes: Response = {
             json: jest.fn(),
         } as unknown as Response;

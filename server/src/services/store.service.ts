@@ -11,8 +11,8 @@ import { StorePayload } from "../types/store.type";
 import { findByIdUser } from "./user.service";
 import { storePayloadValidation } from "../validations/store.validation";
 
-export const findAllStore = async (): Promise<Store[]> => {
-    const data = await findAll();
+export const findAllStore = async (limit?: number): Promise<Store[]> => {
+    const data = await findAll(limit ? limit : undefined);
 
     return data;
 };

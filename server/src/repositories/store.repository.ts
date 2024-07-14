@@ -1,9 +1,13 @@
-import { Store } from "@prisma/client";
+import { Prisma, Store } from "@prisma/client";
 import prisma from "../utils/prisma";
 import { StorePayload } from "../types/store.type";
 
-export const findAll = async (): Promise<Store[]> => {
-    const data = await prisma.store.findMany();
+export const findAll = async (limit?: number): Promise<Store[]> => {
+    const config: Prisma.StoreFindManyArgs = {
+        take: limit,
+    };
+
+    const data = await prisma.store.findMany(limit ? config : undefined);
 
     return data;
 };

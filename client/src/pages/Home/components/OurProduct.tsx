@@ -21,7 +21,7 @@ const OurProduct = () => {
     }, [])
 
     return (
-        <section className="flex justify-center mb-14">
+        <section className="flex justify-center mb-28">
             <div className="container flex flex-col items-center">
                 <div className="flex justify-center mb-[32px] w-[683px] relative">
                     <div className="bg-[#76ABAE] h-[78px] w-[48px] absolute right-[268px] top-[-12px]"></div>

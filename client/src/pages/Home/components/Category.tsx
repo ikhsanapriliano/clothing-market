@@ -64,7 +64,7 @@ const Category = () => {
     ]
 
     return (
-        <section className="flex justify-center mb-14">
+        <section className="flex justify-center mb-28">
             <div className="flex flex-wrap container justify-center gap-[52px]">
                 {
                     categories.map((category, index) => (
