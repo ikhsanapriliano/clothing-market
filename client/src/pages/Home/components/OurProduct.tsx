@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { Product } from "../../../types/product.type"
-import { fetchProducts } from "../../../services/product.service"
-import { ErrorType } from "../../../types/response.type"
+import { Product } from "../../../types/product"
+import { fetchProducts } from "../../../services/product"
+import { ErrorType } from "../../../types/response"
 import ProductImg from "../../../global/assets/img/product/t-shirt-product.jpg"
 import Loading from "../../../global/components/Loading"
 

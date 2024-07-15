@@ -38,8 +38,13 @@ export const verifyUserHandler = async (
         const response: ResponseType = {
             status: 200,
             message: "success",
-            data,
+            data: {
+                token: data,
+            },
         };
+
+        const expires = new Date();
+        expires.setMinutes(expires.getMinutes() + 30);
 
         return res.json(response);
     } catch (error: Error | unknown) {

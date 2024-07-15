@@ -1,6 +1,6 @@
-import { ErrorType, ResponseType } from "../types/response.type";
-import { Store } from "../types/store.type";
-import { getApiUrl } from "../utils/api.util";
+import { ErrorType, ResponseType } from "../types/response";
+import { Store } from "../types/store";
+import { getApiUrl } from "../utils/api";
 
 const apiUrl = getApiUrl();
 

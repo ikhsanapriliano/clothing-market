@@ -34,12 +34,17 @@ export const registerUser = async (payload: RegisterInput): Promise<string> => {
 };
 
 export const verifyUser = async (id: string): Promise<string> => {
-    await findByIdUser(id);
+    const user = await findByIdUser(id);
 
     await verify(id);
-    const data = `verification success`;
 
-    return data;
+    const tokenPayload: TokenPayload = {
+        id: user.id,
+        role: user.role,
+    };
+    const token = generateAccessToken(tokenPayload);
+
+    return token;
 };
 
 export const loginUser = async (payload: LoginPayload): Promise<string> => {

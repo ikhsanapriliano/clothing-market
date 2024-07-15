@@ -52,16 +52,16 @@ describe("auth service test", () => {
             createdAt: new Date(),
             updatedAt: new Date(),
         };
-
-        const mockData = "verification success";
+        const mockToken = "1";
 
         (findByIdUser as jest.Mock).mockResolvedValue(mockUser);
         (verify as jest.Mock).mockResolvedValue(undefined);
         (sendVerificationMail as jest.Mock).mockResolvedValue(undefined);
+        (generateAccessToken as jest.Mock).mockResolvedValue(mockToken);
 
         const result = await verifyUser(mockId);
 
-        expect(result).toEqual(mockData);
+        expect(result).toEqual(mockToken);
     });
 
     it("login user", async () => {

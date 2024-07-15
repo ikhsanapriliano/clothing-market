@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import Loading from "../../../global/components/Loading"
-import { fetchStores } from "../../../services/store.service"
-import { ErrorType } from "../../../types/response.type"
-import { Store } from "../../../types/store.type"
+import { fetchStores } from "../../../services/store"
+import { ErrorType } from "../../../types/response"
+import { Store } from "../../../types/store"
 import StoreImg from "../../../global/assets/img/store/store-preview.png"
 
 const OurStore = () => {
@@ -27,7 +27,7 @@ const OurStore = () => {
                     <div className="bg-[#76ABAE] h-[78px] w-[48px] absolute right-[280px] top-[-12px]"></div>
                     <h2 className="font-semibold text-[36px] z-10">our stores</h2>
                 </div>
-                <div className="flex flex-wrap gap-10 justify-center items-center">
+                <div className="flex flex-wrap gap-10 justify-center items-center mt-2">
                     {
                         !isLoading ?
                             stores.map((item, index) => (

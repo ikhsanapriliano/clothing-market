@@ -37,9 +37,9 @@ describe("auth controller test", () => {
     });
 
     it("verify user handler", async () => {
-        const mockData = "verify success";
+        const mockData = { token: "1" };
 
-        (verifyUser as jest.Mock).mockResolvedValue(mockData);
+        (verifyUser as jest.Mock).mockResolvedValue("1");
 
         const mockResponse: ResponseType = {
             status: 200,

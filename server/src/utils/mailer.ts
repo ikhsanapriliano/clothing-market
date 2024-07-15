@@ -14,6 +14,11 @@ export const sendVerificationMail = async (
     receiver: string,
     id: string
 ): Promise<void> => {
+    let verificationLink: string = `${process.env.HOST}`;
+    if (process.env.ENVIRONMENT === "development") {
+        verificationLink = `${process.env.HOST}:${process.env.CLIENT_PORT}`;
+    }
+
     await transporter.sendMail({
         from: process.env.SENDER_MAIL,
         to: receiver,
@@ -22,7 +27,7 @@ export const sendVerificationMail = async (
             <h1>Welcome to Clothing Market</h1>
             <p>Please verify your account on the button below to continue :)</p>
             <button>
-                <a href="http://${process.env.HOST}:${process.env.PORT}/api/auth/verify/${id}">Verify Now</a>
+                <a href="http://${verificationLink}/verify/${id}">Verify Now</a>
             </button>
         </div>`,
     });

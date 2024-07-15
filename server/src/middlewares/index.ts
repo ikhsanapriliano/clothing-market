@@ -7,14 +7,13 @@ const app: Application = express();
 
 app.use(
     cors({
-        origin: true,
+        origin: "http://localhost:5173",
         credentials: true,
-        preflightContinue: false,
+        preflightContinue: true,
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     })
 );
 
-app.use("*", cors());
 app.use(express.json());
 app.use("/api", routes);
 

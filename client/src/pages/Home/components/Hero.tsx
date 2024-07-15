@@ -2,7 +2,7 @@ import HeroChar from "../assets/img/hero/hero-char.png"
 
 const Hero = () => {
     return (
-        <section className={`mt-[100px] h-[500px] bg-[url("./pages/Home/assets/img/hero/hero-bg.jpg")] bg-cover bg-center flex justify-center mb-14`} >
+        <section className={`pt-[100px] h-[100vh] bg-[url("./pages/Home/assets/img/hero/hero-bg.jpg")] bg-cover bg-center flex justify-center mb-14`} >
             <div className="flex justify-between container h-full">
                 <div className="flex flex-col justify-center items-center w-[65%] pl-[110px]">
                     <p className="text-white w-full font-bold text-[20px]">YOU ARE IN</p>

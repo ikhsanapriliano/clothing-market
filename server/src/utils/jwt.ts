@@ -1,5 +1,5 @@
 import "dotenv/config";
-import jsonWebToken, { JwtPayload } from "jsonwebtoken";
+import jsonWebToken from "jsonwebtoken";
 import { TokenPayload } from "../types/auth.type";
 import { VerifyTokentype } from "../types/jwt.type";
 
@@ -31,7 +31,7 @@ export const verifyAccessToken = (token: string): VerifyTokentype => {
     } catch (error: Error | unknown) {
         data = {
             payload: "",
-            error: (error as Error).message,
+            error: `validation error ${(error as Error).message}`,
         };
 
         return data;

@@ -3,7 +3,7 @@ import Banner1 from "../assets/img/banner/banner-1.jpg"
 import Banner2 from "../assets/img/banner/banner-2.jpg"
 import Banner3 from "../assets/img/banner/banner-3.jpg"
 import "../assets/css/banner.css"
-import { wait } from "../../../utils/animation.util"
+import { wait } from "../../../utils/animation"
 
 const Banner = () => {
     const bannerList = [Banner1, Banner2, Banner3]
